@@ -1,9 +1,15 @@
 import React, { Component } from 'react';
-import { View, Text, ImageBackground, StyleSheet, Picker, TextInput } from 'react-native';
+import { View, Text, ImageBackground, Image, StyleSheet, Picker, TextInput } from 'react-native';
 
 export class Main extends Component {
+  state = {
+    chosenIngredient: '',
+    chosenMeasure: ''
+  };
+
   render() {
   const backgroundImage = require('./main-background.png');
+  const plusSymbol = require('./images/plus-symbol.png');
   const styles = StyleSheet.create({
     backgroundImage: {
       width: '100%',
@@ -38,21 +44,28 @@ export class Main extends Component {
     addIngredient: {
       width: '70%',
       height: 70,
+      alignSelf: 'center',
+      marginTop: 10
     },
     pickerIngredient: {
-      width: '35%',
+      width: '25%',
       height: '100%',
       backgroundColor: '#E1E6FF',
       marginLeft: '10%'
     },
     pickerMeasure: {
-      width: '35%',
+      width: '45%',
       height: '100%',
       backgroundColor: '#E1E6FF'
     },
     quantityInput: {
       width: '20%',
       height: '100%'
+    },
+    plusSymbol: {
+      height: 60,
+      width: 60,
+      alignSelf: 'flex-end'
     },
     text: {
       fontSize: 40,
@@ -71,13 +84,13 @@ export class Main extends Component {
         </View>
         <View style={styles.ingredientsContainer}>
           <View style={styles.ingredient}>
-            <Picker style={styles.pickerIngredient}>
+            <Picker style={styles.pickerIngredient} selectedValue={this.state.chosenIngredient} onValueChange={(itemValue) => this.setState({chosenIngredient: itemValue})}>
               <Picker.Item label="Apples" value="apples" />
               <Picker.Item label="Eggs" value="eggs" />
               <Picker.Item label="Milk" value="milk" />
               <Picker.Item label="Sugar" value="sugar" />
             </Picker>
-            <Picker style={styles.pickerMeasure}>
+            <Picker style={styles.pickerMeasure} selectedValue={this.state.chosenMeasure} onValueChange={(itemValue) => this.setState({chosenMeasure: itemValue})}>
               <Picker.Item label="Count" value="count" />
               <Picker.Item label="Cups" value="cups" />
               <Picker.Item label="Ounces" value="ounces" />
@@ -87,7 +100,7 @@ export class Main extends Component {
             <TextInput style={styles.quantityInput} keyboardType={'numeric'} defaultValue={"1"} selectTextOnFocus />
           </View>
           <View style={styles.addIngredient}>
-
+            <Image source={plusSymbol} style={styles.plusSymbol} />
           </View>
         </View>
       </ImageBackground>
