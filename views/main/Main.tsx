@@ -9,7 +9,8 @@ export class Main extends Component {
         measure: 'count',
         quantity: 1
       }
-    ]
+    ],
+    recipeName: 'Recipee'
   };
 
   render() {
@@ -33,6 +34,8 @@ export class Main extends Component {
         borderRadius: 10,
         paddingVertical: 25,
         alignSelf: 'center',
+        textAlign: 'center',
+        fontSize: 28
       },
       ingredientsContainer: {
         width: '100%',
@@ -130,7 +133,12 @@ export class Main extends Component {
             <Picker.Item label="Tablespoons" value="tablespoons" />
             <Picker.Item label="Teaspoons" value="teaspoons" />
           </Picker>
-          <TextInput style={styles.quantityInput} keyboardType={'numeric'} defaultValue={"1"} selectTextOnFocus onChangeText={(itemValue) => {
+          <TextInput
+            style={styles.quantityInput}
+            keyboardType={'numeric'}
+            defaultValue={"1"}
+            selectTextOnFocus
+            onChangeText={(itemValue) => {
               let tempState = this.state;
               tempState.ingredients[id].quantity = parseInt(itemValue);
               this.setState(tempState);              
@@ -148,9 +156,11 @@ export class Main extends Component {
     return (
       <ImageBackground source={backgroundImage} style={styles.backgroundImage}>
         <View style={styles.headContainer}>
-          <View style={styles.headBox}>
-            <Text style={styles.text}>Recipe</Text>
-          </View>
+          <TextInput style={styles.headBox} value={this.state.recipeName} selectTextOnFocus onChangeText={(itemValue) => {
+              let tempState = this.state;
+              tempState.recipeName = itemValue;
+              this.setState(tempState);
+            }} />
         </View>
         <ScrollView style={styles.ingredientsContainer}>
             {fullIngredient}
