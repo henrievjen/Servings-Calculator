@@ -81,7 +81,8 @@ export class Main extends Component {
         backgroundColor: 'white',
         borderRadius: 5,
         textAlignVertical: 'top',
-        padding: 5
+        padding: 5,
+        marginTop: 10
       },
       saveButton: {
         marginTop: '20%',
@@ -102,20 +103,38 @@ export class Main extends Component {
     const fullIngredient = this.state.ingredients.map((data, id) => {
       return (
         <View style={styles.ingredient} key={id}>
-          <Picker style={styles.pickerIngredient} selectedValue={data.ingredient}>
+          <Picker 
+            style={styles.pickerIngredient} 
+            selectedValue={data.ingredient} 
+            onValueChange={(itemValue) => {
+              let tempState = this.state;
+              tempState.ingredients[id].ingredient = itemValue;
+              this.setState(tempState);              
+            }}>
             <Picker.Item label="Apples" value="apples" />
             <Picker.Item label="Eggs" value="eggs" />
             <Picker.Item label="Milk" value="milk" />
             <Picker.Item label="Sugar" value="sugar" />
           </Picker>
-          <Picker style={styles.pickerMeasure} selectedValue={data.measure}>
+          <Picker
+            style={styles.pickerMeasure}
+            selectedValue={data.measure}
+            onValueChange={(itemValue) => {
+              let tempState = this.state;
+              tempState.ingredients[id].measure = itemValue;
+              this.setState(tempState);              
+            }}>
             <Picker.Item label="Count" value="count" />
             <Picker.Item label="Cups" value="cups" />
             <Picker.Item label="Ounces" value="ounces" />
             <Picker.Item label="Tablespoons" value="tablespoons" />
             <Picker.Item label="Teaspoons" value="teaspoons" />
           </Picker>
-          <TextInput style={styles.quantityInput} keyboardType={'numeric'} defaultValue={"1"} selectTextOnFocus />
+          <TextInput style={styles.quantityInput} keyboardType={'numeric'} defaultValue={"1"} selectTextOnFocus onChangeText={(itemValue) => {
+              let tempState = this.state;
+              tempState.ingredients[id].quantity = parseInt(itemValue);
+              this.setState(tempState);              
+            }} />
         </View>
       )
     })
