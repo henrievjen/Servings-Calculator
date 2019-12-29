@@ -10,7 +10,8 @@ export class Main extends Component {
         quantity: 1
       }
     ],
-    recipeName: 'Recipee'
+    recipeName: 'Recipee',
+    recipeNotes: ''
   };
 
   render() {
@@ -156,7 +157,11 @@ export class Main extends Component {
     return (
       <ImageBackground source={backgroundImage} style={styles.backgroundImage}>
         <View style={styles.headContainer}>
-          <TextInput style={styles.headBox} value={this.state.recipeName} selectTextOnFocus onChangeText={(itemValue) => {
+          <TextInput
+            style={styles.headBox}
+            value={this.state.recipeName}
+            selectTextOnFocus
+            onChangeText={(itemValue) => {
               let tempState = this.state;
               tempState.recipeName = itemValue;
               this.setState(tempState);
@@ -168,7 +173,15 @@ export class Main extends Component {
             <Image source={plusSymbol} style={styles.plusSymbol} />
           </TouchableOpacity>
         </ScrollView>
-        <TextInput style={styles.notes} placeholder={"Notes..."} />
+        <TextInput
+          style={styles.notes}
+          placeholder={"Notes..."}
+          value={this.state.recipeNotes}
+          onChangeText={(itemValue) => {
+            let tempState = this.state;
+            tempState.recipeNotes = itemValue;
+            this.setState(tempState);
+          }} />
         <TouchableOpacity style={styles.saveButton}>
           <Text style={{paddingVertical: '5%', textAlign: 'center', textAlignVertical: 'center', color: 'white', fontSize: 30}}>Save</Text>
         </TouchableOpacity>
