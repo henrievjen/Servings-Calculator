@@ -10,7 +10,7 @@ export class Main extends Component {
         quantity: 1
       }
     ],
-    recipeName: 'Recipee',
+    recipeName: 'Recipe',
     recipeNotes: ''
   };
 
